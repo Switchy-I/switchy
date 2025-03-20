@@ -7,7 +7,7 @@
                                                                    |___/
 ```
 <details>
-  <summary> 🔢 ## Table of contents</summary>
+  <summary> 🔢 Table of contents</summary>
   <br>
 
 - 🔻[Table of contents](#table-of-contents)
@@ -25,7 +25,7 @@
 
 
 <details>
-  <summary>⛈️ ## Problem Statement</summary>
+  <summary>⛈️ Problem Statement</summary>
   <br>
 
 Managing multiple repositories on a local device can be cumbersome, requiring manual tracking of paths, frequent navigation, and inefficient switching between projects. Developers often struggle with quickly accessing their most-used repositories and maintaining an organized workflow.  
@@ -34,7 +34,7 @@ Managing multiple repositories on a local device can be cumbersome, requiring ma
 </details>
 
 <details>
-  <summary>✔️ ## Solution</summary>
+  <summary>✔️ Solution</summary>
   <br>
   
 
