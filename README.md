@@ -68,8 +68,8 @@ Swichy is a command-line interpreter designed for easy management of repositorie
   - `Help Command`: The system must provide a help command to display information about available commands and their usage.
 
 <details>
-  <summary>📌 <h3> Non-Functional Requirements </h3></summary>
-  <br>
+  <summary>📌 Non-Functional Requirements</summary>
+ br>
   
 
 - **Performance**
