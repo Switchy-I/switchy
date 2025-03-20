@@ -69,7 +69,7 @@ Swichy is a command-line interpreter designed for easy management of repositorie
 
 <details>
   <summary>📌 Non-Functional Requirements</summary>
- br>
+    <br>
   
 
 - **Performance**
