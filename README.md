@@ -7,7 +7,7 @@
                                                                    |___/
 ```
 <details>
-  <summary> 🔢 Table of contents</summary>
+  <summary> 🔢 <h2>Table of contents</h2></summary>
   <br>
 
 - 🔻[Table of contents](#table-of-contents)
@@ -25,7 +25,7 @@
 
 
 <details>
-  <summary>⛈️ Problem Statement</summary>
+  <summary>⛈️ <h2>Problem Statement</h2></summary>
   <br>
 
 Managing multiple repositories on a local device can be cumbersome, requiring manual tracking of paths, frequent navigation, and inefficient switching between projects. Developers often struggle with quickly accessing their most-used repositories and maintaining an organized workflow.  
@@ -34,7 +34,7 @@ Managing multiple repositories on a local device can be cumbersome, requiring ma
 </details>
 
 <details>
-  <summary>✔️ Solution</summary>
+  <summary>✔️ <h2>Solution</h2></summary>
   <br>
   
 
@@ -68,7 +68,7 @@ Swichy is a command-line interpreter designed for easy management of repositorie
   - `Help Command`: The system must provide a help command to display information about available commands and their usage.
 
 <details>
-  <summary>📌 ### Non-Functional Requirements</summary>
+  <summary>📌 <h3> Non-Functional Requirements </h3></summary>
   <br>
   
 
