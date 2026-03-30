@@ -7,7 +7,6 @@ const TYPES = {
   REQUIRED: "required",
   VSCODE: "vscode",
   DUPLICATE: "duplicate",
-  // features
   DOT_GIT: ".git",
   ADD: "add",
   UPDATE: "update",

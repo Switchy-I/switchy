@@ -16,6 +16,7 @@ const add = (path) => {
   );
 
   const filePath = getDataPath();
+  console.log(filePath);
   const data = FileOperator.readFromFile(filePath);
 
   let parsedData = JsonOperator.parsingJsonData(data);

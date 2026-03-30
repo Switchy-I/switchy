@@ -9,7 +9,6 @@ const pathIsExist = function (path) {
 const fileIsEmpty = function (path) {
   let data = FileOperator.readFromFile(path);
 
-  // If data is null or an empty string, return "Empty"
   if (
     data === null ||
     data === "" ||
@@ -18,7 +17,6 @@ const fileIsEmpty = function (path) {
     return TAGS.EMPTY;
   }
 
-  // Otherwise, return "NotEmpty"
   return TAGS.FULL;
 };
 

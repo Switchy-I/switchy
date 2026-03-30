@@ -4,11 +4,12 @@ const {
   getSuccessMessage,
   TYPES,
 } = require("../utils/messageHandler");
+const {
+  getPath
+} = require("./pathModule");
 const { logger, STATUS } = require("../utils/logger");
 const { Log } = require("../models/log");
 
-// error  ==> to handle critical failures where the command itself cannot execute.
-// stderr ==> to handle errors that occur during the execution of the script.
 class RunScript {
   static openInVSCode = (path) => {
     exec(`code "${path}"`, (error) => {
@@ -52,7 +53,6 @@ class RunScript {
 
   static dotGitIsExist = async (repoPath) => {
     const path = getPath("../scripts/dotGitExist.sh");
-    console.log(repoPath);
 
     return new Promise((resolve, reject) => {
       exec(`bash ${path} ${repoPath}`, (error, stdout, stderr) => {
