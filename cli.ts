@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-const { Command } = require("commander");
+import { Command } from "commander";
+import Action from "./action";
+
 const program = new Command();
-const { Action } = require("./action");
 
 program
   .command("init")
   .description(
-    "Initialize the data file where the repository and its data are stored (no arguments)."
+    "Initialize the data file where the repository and its data are stored (no arguments).",
   )
   .action(() => {
     Action.initAction();
@@ -51,7 +52,7 @@ program
 program
   .command("find <repoName>")
   .description(
-    "Find for a repository to get its information by repoName (argument: `repoName`)"
+    "Find for a repository to get its information by repoName (argument: `repoName`)",
   )
   .action((repoName) => {
     Action.searchAction(repoName);
@@ -60,7 +61,7 @@ program
 program
   .command("remove <repoName>")
   .description(
-    "Remove a specific repository by its repoName (arguments: `repoName`)"
+    "Remove a specific repository by its repoName (arguments: `repoName`)",
   )
   .action((repoName) => {
     Action.removeAction(repoName);
@@ -69,7 +70,7 @@ program
 program
   .command("update <repoName> <path>")
   .description(
-    "Update the path of an existing repository (arguments: `repoName`, `path`)"
+    "Update the path of an existing repository (arguments: `repoName`, `path`)",
   )
   .action((repoName, path) => {
     Action.updateAction(repoName, path);
