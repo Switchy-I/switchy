@@ -7,13 +7,9 @@ import { TAGS } from "./tags";
 
 import { logger, STATUS } from "./logger";
 
-import {
-  TYPES,
-  getErrorMessage,
-  getSuccessMessage,
-} from "./messageHandler";
+import { TYPES, getErrorMessage, getSuccessMessage } from "./messageHandler";
 
-import { getDataPath, getPath, getName } from "./pathModule"
+import { getDataPath, getPath, getName } from "./pathModule";
 
 import { fileIsEmpty, pathIsExist } from "./validator";
 
@@ -34,5 +30,3 @@ export {
   RunScript,
   TAGS,
 };
-
-

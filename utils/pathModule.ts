@@ -1,29 +1,23 @@
-const path = require("path");
-const os = require("os");
+import path from "path";
+import os from "os";
 
-const config = require("../config/config");
+import config from "../config/config";
 
-const getDataPath = function () {
+export const getDataPath = function () {
   return path.join(
     __dirname,
     `../${config.DIRECTORY_DATA}/${config.REPOSITORY_NAME}.json`
   );
 };
 
-const getPath = function (filePath) {
+export const getPath = function (filePath: string) {
   return path.join(__dirname, filePath);
 };
 
-const getName = function (path) {
+export const getName = function (path: string) {
   const currentOS = os.type();
   const condition = currentOS === `Linux` || currentOS === `Darwin`;
   const index = path.lastIndexOf(condition ? "/" : `\\`) + 1;
   const name = path.substring(index);
   return name;
-};
-
-module.exports = {
-  getDataPath,
-  getPath,
-  getName,
 };

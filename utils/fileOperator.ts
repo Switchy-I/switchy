@@ -1,12 +1,13 @@
-const fs = require("fs");
-const config = require("../config/config");
-const { Log } = require("../models/log");
-const { logger, STATUS } = require("./logger");
-const { getErrorMessage, TYPES } = require("./messageHandler");
-const { getPath } = require("./pathModule");
+import fs, { PathOrFileDescriptor } from "fs";
+import config from "../config/config";
+import { Log } from "../models/log";
+import { logger, STATUS } from "./logger";
+import { getErrorMessage, TYPES } from "./messageHandler";
+import { getPath } from "./pathModule";
 
-class FileOperator {
-  static readFromFile = function (file) {
+
+export class FileOperator {
+  static readFromFile = function (file: PathOrFileDescriptor) {
     try {
       const data = fs.readFileSync(file, "utf-8");
       return data;
@@ -16,7 +17,10 @@ class FileOperator {
     }
   };
 
-  static writeToFile = function (file, data) {
+  static writeToFile = function (
+    file: PathOrFileDescriptor,
+    data: string | NodeJS.ArrayBufferView,
+  ) {
     try {
       const dirPath = getPath(`../${config.DIRECTORY_DATA}`);
       if (!fs.existsSync(dirPath)) {
@@ -29,6 +33,3 @@ class FileOperator {
     }
   };
 }
-module.exports = {
-  FileOperator,
-};

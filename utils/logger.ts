@@ -1,4 +1,6 @@
-const logger = (log) => {
+import { Log } from "../models/log";
+
+export const logger = (log: Log) => {
   const statusColor =
     log.status === STATUS.SUCCESS
       ? CONSOLE_COLORS.SUCCESS
@@ -14,10 +16,12 @@ const logger = (log) => {
   }
 };
 
-const STATUS = {
+export const STATUS = {
   SUCCESS: "SUCCESS",
   FAILED: "FAILED",
-};
+} as const;
+
+export type StatusType = (typeof STATUS)[keyof typeof STATUS];
 
 const CONSOLE_COLORS = {
   FAILED: "\x1b[31m",
@@ -25,7 +29,3 @@ const CONSOLE_COLORS = {
   DATA: "\x1b[33m",
 };
 
-module.exports = {
-  logger,
-  STATUS,
-};
