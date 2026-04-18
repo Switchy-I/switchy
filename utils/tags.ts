@@ -1,4 +1,4 @@
-const TAGS = {
+export const TAGS = {
   DUPLICATED: 'duplicated',
   ADDED: 'added',
   EMPTY: 'empty',
@@ -11,8 +11,7 @@ const TAGS = {
   NO_MATCH: 'no match',
   MISSING: 'missing',
   NOT_GIT_REPO: 'not git repo'
-};
+} as const;
 
-module.exports = {
-  TAGS
-};
+
+export type TagsType = (typeof TAGS)[keyof typeof TAGS];

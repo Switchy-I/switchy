@@ -1,12 +1,13 @@
-const { TAGS } = require("./tags");
-const { FileOperator } = require("../utils/fileOperator");
+import { TAGS, TagsType } from "./tags";
+import { FileOperator } from "../utils/fileOperator";
 
-const fs = require("fs");
-const pathIsExist = function (path) {
+import fs from "fs";
+
+export const pathIsExist = function (path: string): boolean {
   return fs.existsSync(path);
 };
 
-const fileIsEmpty = function (path) {
+export const fileIsEmpty = function (path: string): TagsType {
   let data = FileOperator.readFromFile(path);
 
   if (
@@ -20,7 +21,3 @@ const fileIsEmpty = function (path) {
   return TAGS.FULL;
 };
 
-module.exports = {
-  pathIsExist,
-  fileIsEmpty,
-};
