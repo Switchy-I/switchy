@@ -1,17 +1,15 @@
-const { exec } = require("child_process");
-const {
+import { exec } from "child_process";
+import {
   getErrorMessage,
   getSuccessMessage,
   TYPES,
-} = require("../utils/messageHandler");
-const {
-  getPath
-} = require("./pathModule");
-const { logger, STATUS } = require("../utils/logger");
-const { Log } = require("../models/log");
+} from "../utils/messageHandler";
+import { getPath } from "./pathModule";
+import { logger, STATUS } from "../utils/logger";
+import { Log } from "../models/log";
 
-class RunScript {
-  static openInVSCode = (path) => {
+export class RunScript {
+  static openInVSCode = (path: string) => {
     exec(`code "${path}"`, (error) => {
       if (error) {
         logger(new Log(STATUS.FAILED, getErrorMessage(TYPES.VSCODE)));
@@ -26,7 +24,7 @@ class RunScript {
 
     exec(`bash ${path}`, (error, stdout, stderr) => {
       if (error) {
-        logger(new Log(STATUS.FAILED, error));
+        logger(new Log(STATUS.FAILED, error.message));
         return;
       } else if (stderr) {
         logger(new Log(STATUS.FAILED, stderr));
@@ -39,25 +37,28 @@ class RunScript {
   static initializeDataPowerShell = () => {
     const path = getPath("../scripts/init.ps1");
 
-    exec(`powershell -ExecutionPolicy Bypass -File ${path}`, (error, stdout, stderr) => {
-      if (error) {
-        logger(new Log(STATUS.FAILED, error));
-        return;
-      } else if (stderr) {
-        logger(new Log(STATUS.FAILED, stderr));
-        return;
-      }
-      logger(new Log(STATUS.SUCCESS, getSuccessMessage(TYPES.INIT)));
-    });
+    exec(
+      `powershell -ExecutionPolicy Bypass -File ${path}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          logger(new Log(STATUS.FAILED, error.message));
+          return;
+        } else if (stderr) {
+          logger(new Log(STATUS.FAILED, stderr));
+          return;
+        }
+        logger(new Log(STATUS.SUCCESS, getSuccessMessage(TYPES.INIT)));
+      },
+    );
   };
 
-  static dotGitIsExist = async (repoPath) => {
+  static dotGitIsExist = async (repoPath: string) => {
     const path = getPath("../scripts/dotGitExist.sh");
 
     return new Promise((resolve, reject) => {
       exec(`bash ${path} ${repoPath}`, (error, stdout, stderr) => {
         if (error) {
-          logger(new Log(STATUS.FAILED, error));
+          logger(new Log(STATUS.FAILED, error.message));
           return resolve(0);
         }
         if (stderr) {
@@ -69,24 +70,24 @@ class RunScript {
     });
   };
 
-  static dotGitIsExistPowerShell = async (repoPath) => {
+  static dotGitIsExistPowerShell = async (repoPath: string) => {
     const path = getPath("../scripts/dotGitExist.ps1");
 
     return new Promise((resolve, reject) => {
-      exec(`powershell -ExecutionPolicy Bypass -File ${path} ${repoPath}`, 
+      exec(
+        `powershell -ExecutionPolicy Bypass -File ${path} ${repoPath}`,
         (error, stdout, stderr) => {
-        if (error) {
-          logger(new Log(STATUS.FAILED, error));
-          return resolve(0);
-        }
-        if (stderr) {
-          logger(new Log(STATUS.FAILED, stderr));
-          return resolve(0);
-        }
-        resolve(stdout.trim());
-      });
+          if (error) {
+            logger(new Log(STATUS.FAILED, error.message));
+            return resolve(0);
+          }
+          if (stderr) {
+            logger(new Log(STATUS.FAILED, stderr));
+            return resolve(0);
+          }
+          resolve(stdout.trim());
+        },
+      );
     });
   };
 }
-
-module.exports = { RunScript };
