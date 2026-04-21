@@ -13,7 +13,7 @@ export class JsonOperator {
     }
   };
 
-  static stringDataToWriteinJson = function (data: any) {
+  static stringDataToWriteInJson = function (data: any) {
     try {
       const stringData = JSON.stringify(data);
       return stringData;

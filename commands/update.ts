@@ -1,13 +1,8 @@
-const {
-  FileOperator,
-  JsonOperator,
-  TAGS,
-  getDataPath
-} = require("../utils/index");
-const { getName } = require("../utils/pathModule");
+import { Repository } from "../models/repository";
+import { FileOperator, JsonOperator, TAGS, getDataPath } from "../utils/index";
+import { getName } from "../utils/pathModule";
 
-const update = (name, path) => {
-
+export const update = (name: string, path: string) => {
   const repoName = getName(path);
 
   if (repoName !== name) {
@@ -18,7 +13,7 @@ const update = (name, path) => {
   const parsedData = JsonOperator.parsingJsonData(data);
 
   const [repository] = parsedData["repositories"].filter(
-    (repo) => repo.name === name
+    (repo: Repository) => repo.name === name,
   );
 
   if (!repository) {
@@ -34,12 +29,8 @@ const update = (name, path) => {
   repository.path = path;
 
   parsedData["repositories"][index] = repository;
-  const stringData = JsonOperator.stringDataToWriteinJson(parsedData);
+  const stringData = JsonOperator.stringDataToWriteInJson(parsedData);
   FileOperator.writeToFile(getDataPath(), stringData);
 
   return TAGS.UPDATED;
-};
-
-module.exports = {
-  update,
 };
