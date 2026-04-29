@@ -3,19 +3,19 @@
 // 2) User Defined Modules
 
 
-const {
+import {
   FileOperator,
   JsonOperator,
   getDataPath,
   RepoOperator,
   TAGS,
-} = require("../utils/index");
+} from"../utils/index"
 
-const remove = (name) => {
+export const remove = (name: string) => {
   //  first thing ==> read data from file data
   const filePath = getDataPath();
   
-  let data = FileOperator.readFromFile(filePath);
+  let data: any = FileOperator.readFromFile(filePath);
   // second step parse it
   data = JsonOperator.parsingJsonData(data);
   
@@ -31,11 +31,7 @@ const remove = (name) => {
   } 
 
   RepoOperator.removeRepoByIndex(data["repositories"], index);
-  data = JsonOperator.stringDataToWriteinJson(data);
+  data = JsonOperator.stringDataToWriteInJson(data);
   FileOperator.writeToFile(filePath, data);
   return TAGS.REMOVED;
-};
-
-module.exports = {
-  remove,
 };

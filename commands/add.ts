@@ -1,18 +1,18 @@
-const { Repository } = require("../models/repository");
-const {
+import { Repository } from "../models/repository";
+import {
   FileOperator,
   JsonOperator,
   getDataPath,
   getName,
   TAGS,
-} = require("../utils/index");
+} from "../utils/index";
 
-const add = (path) => {
+export const add = (path: string) => {
   const name = getName(path);
   const repository = new Repository(
     name,
     path,
-    new Date(Date.now()).toUTCString()
+    new Date(Date.now()).toUTCString(),
   );
 
   const filePath = getDataPath();
@@ -22,7 +22,7 @@ const add = (path) => {
   let parsedData = JsonOperator.parsingJsonData(data);
 
   const result = parsedData["repositories"].find(
-    (repo) => repo.name === repository.name
+    (repo: Repository) => repo.name === repository.name,
   );
 
   if (result) {
@@ -30,12 +30,9 @@ const add = (path) => {
   }
 
   parsedData["repositories"].push(repository);
-  parsedData = JsonOperator.stringDataToWriteinJson(parsedData);
+  parsedData = JsonOperator.stringDataToWriteInJson(parsedData);
   FileOperator.writeToFile(getDataPath(), parsedData);
 
   return { tag: TAGS.ADDED, repository };
 };
 
-module.exports = {
-  add,
-};

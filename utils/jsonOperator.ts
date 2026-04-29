@@ -1,16 +1,9 @@
-const { Log } = require("../models/log")
-const { 
-  logger, 
-  STATUS 
-} = require("./logger");
-const {
-  getErrorMessage, 
-  TYPES
-} = require("./messageHandler")
+import { Log } from "../models/log";
+import { logger, STATUS } from "./logger";
+import { getErrorMessage, TYPES } from "./messageHandler";
 
-class JsonOperator {
-  
-  static parsingJsonData = function (data) {
+export class JsonOperator {
+  static parsingJsonData = function (data: string) {
     try {
       const parsedData = JSON.parse(data);
       return parsedData;
@@ -20,7 +13,7 @@ class JsonOperator {
     }
   };
 
-  static stringDataToWriteinJson = function (data) {
+  static stringDataToWriteInJson = function (data: any) {
     try {
       const stringData = JSON.stringify(data);
       return stringData;
@@ -29,9 +22,5 @@ class JsonOperator {
       process.exit(0);
     }
   };
-  
 }
 
-module.exports = {
-  JsonOperator,
-};

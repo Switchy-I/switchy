@@ -1,28 +1,19 @@
-const {
+import {
   FileOperator,
   JsonOperator,
   RepoOperator,
   RunScript,
   getDataPath,
   TAGS
-} = require('../utils/index')
-/**
- * The `redirect` function handles the process of:
- * 1. Checking if a repository exists in the data file.
- * 2. Updating the repository's "lastOpen" field to mark it as the most recently opened repo.
- * 3. Running a script to open the repository in VSCode.
- * 4. Writing the updated data back to the JSON file.
- *
- * @param {string} name - The name of the repository to be processed.
- * @returns {string} - Returns "Exist" if the repository exists and the operation was successful, otherwise returns "NotExist".
- */
+} from '../utils/index'
 
-const redirect = (name) => {
+
+export const redirect = (name: string) => {
   // Construct the file path to the JSON data file where repositories are stored.
   const path = getDataPath();
 
   // Step 1: Read the data from the JSON file.
-  let data = FileOperator.readFromFile(path);
+  let data: any = FileOperator.readFromFile(path);
 
   // Step 2: Parse the JSON data to make it manipulable.
   data = JsonOperator.parsingJsonData(data);
@@ -48,7 +39,7 @@ const redirect = (name) => {
   RunScript.openInVSCode(data["repositories"][index]["path"]);
 
   // Step 6: Convert the updated data back to a string format for writing to the file.
-  data = JsonOperator.stringDataToWriteinJson(data);
+  data = JsonOperator.stringDataToWriteInJson(data);
 
   // Step 7: Write the updated data back to the JSON file.
   FileOperator.writeToFile(path, data);
@@ -57,6 +48,3 @@ const redirect = (name) => {
   return message;
 };
 
-module.exports = {
-  redirect,
-};

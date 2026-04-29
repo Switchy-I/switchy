@@ -1,23 +1,18 @@
-const {
+import {
   FileOperator,
   JsonOperator,
   getDataPath
-} = require('../utils/index') 
+} from'../utils/index' 
 
-const init = () => {
+export const init = () => {
   const path = getDataPath();
 
   let dataStructure = {
     lastOpen: "none", 
     repositories: [],  
-  };
+  } as unknown as string;
 
-  dataStructure = JsonOperator.stringDataToWriteinJson(dataStructure);
+  dataStructure = JsonOperator.stringDataToWriteInJson(dataStructure)
 
   FileOperator.writeToFile(path, dataStructure);
-};
-
-
-module.exports = {
-  init,
 };

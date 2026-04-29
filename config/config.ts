@@ -3,4 +3,4 @@ const config = {
   REPOSITORY_NAME: "data",
 };
 
-module.exports = config;
+export default config;

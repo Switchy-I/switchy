@@ -1,11 +1,11 @@
-const {
+import  {
   FileOperator,
   JsonOperator,
   getDataPath,
   TAGS,
-} = require("../utils/index");
+} from "../utils/index";
 
-const list = () => {
+export const list = () => {
   const data = FileOperator.readFromFile(getDataPath());
   if (!data) {
     return TAGS.EMPTY;
@@ -13,8 +13,4 @@ const list = () => {
   const parsedData = JsonOperator.parsingJsonData(data);
 
   return parsedData["repositories"];
-};
-
-module.exports = {
-  list,
 };
