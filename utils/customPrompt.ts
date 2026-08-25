@@ -36,6 +36,20 @@ class CustomPrompt {
       this.handlePromptError(error);
     }
   }
+
+  async confirm(message: string) {
+    try {
+      const answer = await inquirer.prompt({
+        type: "confirm",
+        message,
+        name: "confirm",
+      });
+
+      return answer;
+    } catch (error: any) {
+      this.handlePromptError(error);
+    }
+  }
 }
 
 export default new CustomPrompt();

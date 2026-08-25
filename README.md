@@ -138,7 +138,7 @@ Swichy is an open-source project, and contributions from developers are highly e
 
 ## Suggestions:
 
-We welcome feedback and feature requests to enhance Swichy. If you have ideas for improvements, feel free to:
+We welcome feedback and feature requests to enhance Switchy. If you have ideas for improvements, feel free to:
 
 - Open an issue on our [GitHub repository](https://github.com/MustafaAhmed313/Swichy/issues).
 - Discuss potential features in our community discussions (if available).
