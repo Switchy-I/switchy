@@ -73,7 +73,7 @@ program
     const answer = await customPrompt.search();
     if (answer && answer.repoName) {
       const deleted = await customPrompt.confirm(
-        `Are you sure you want to delete "${answer.repoName}" repository?`
+        `Are you sure you want to remove "${answer.repoName}" repository?`
       );
       if (deleted && deleted.confirm) {
         Action.removeAction(answer.repoName);
