@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import Action from "./action";
+import { customPrompt } from "./utils"
 
 const program = new Command();
 
@@ -50,12 +51,12 @@ program
   });
 
 program
-  .command("find <repoName>")
-  .description(
-    "Find for a repository to get its information by repoName (argument: `repoName`)",
-  )
-  .action((repoName) => {
-    Action.searchAction(repoName);
+  .option("-s, --search", "Search for a repository to get its information by repoName")
+  .action(async () => {
+    const answer = await customPrompt.search();
+    if (answer && answer.repoName) {
+      Action.searchAction(answer.repoName);
+    }
   });
 
 program

@@ -131,7 +131,7 @@ dist
 .vercel
 
 # Data Directory
-data
+data/
 
 #Test Directory
 tests/

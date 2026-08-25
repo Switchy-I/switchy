@@ -4,7 +4,7 @@ export const logger = (log: Log) => {
   const statusColor =
     log.status === STATUS.SUCCESS
       ? CONSOLE_COLORS.SUCCESS
-      : CONSOLE_COLORS.FAILED;
+      : log.status === STATUS.FAILED ? CONSOLE_COLORS.FAILED : CONSOLE_COLORS.INFO;
 
   const dataColor = CONSOLE_COLORS.DATA;
   if (log) {
@@ -19,6 +19,7 @@ export const logger = (log: Log) => {
 export const STATUS = {
   SUCCESS: "SUCCESS",
   FAILED: "FAILED",
+  INFO: "INFO",
 } as const;
 
 export type StatusType = (typeof STATUS)[keyof typeof STATUS];
@@ -26,6 +27,7 @@ export type StatusType = (typeof STATUS)[keyof typeof STATUS];
 const CONSOLE_COLORS = {
   FAILED: "\x1b[31m",
   SUCCESS: "\x1b[32m",
+  INFO: "\x1b[34m",
   DATA: "\x1b[33m",
 };
 
