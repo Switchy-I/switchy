@@ -52,7 +52,12 @@ program
 
 program
   .option("-s, --search", "Search for a repository to get its information by repoName")
-  .action(async () => {
+  .action(async (options) => {
+    if (!options.search) {
+      program.help();
+      return;
+    }
+
     const answer = await customPrompt.search();
     if (answer && answer.repoName) {
       Action.searchAction(answer.repoName);
