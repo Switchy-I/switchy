@@ -49,14 +49,14 @@ program
   .description("Open specfic repo with his repoName")
   .action(async (options) => {
     let repoName = options.repo;
-
+    
     if (!repoName) {
       const answer = await customPrompt.search();
       if (answer && answer.repoName) {
         repoName = answer.repoName;
       }
     }
-
+    
     Action.redirectAction(repoName);
   });
 
