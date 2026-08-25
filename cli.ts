@@ -8,6 +8,7 @@ const program = new Command();
 
 program
   .command("init")
+  .alias("i")
   .description(
     "Initialize the data file where the repository and its data are stored (no arguments).",
   )
@@ -17,27 +18,31 @@ program
 
 program
   .command("add <path>")
+  .alias("a")
   .description("Add a new repository (arguments: `path`).")
   .action((path) => {
     Action.addAction(path);
   });
 
 program
-  .command("lts")
-  .description("Display the latest opened repository")
+  .command("last")
+  .alias("lts")
+  .description("Display the latest opened repository (no arguments).")
   .action(() => {
     Action.lastAction();
   });
 
 program
   .command("clear")
-  .description("Clear all repositories stored")
+  .alias("c")
+  .description("Clear all repositories stored (no arguments).")
   .action(() => {
     Action.resetAction();
   });
 
 program
-  .command("ls")
+  .command("list")
+  .alias("ls")
   .description("List all repositories (no arguments).")
   .action(() => {
     Action.listAction();
@@ -46,38 +51,47 @@ program
 program
   .command("run")
   .option("-r, --repo <repoName>", "Existing repository name")
-  .description("Open specfic repo with his repoName")
+  .description("Open specfic repo with his repoName (no arguments).")
   .action(async (options) => {
     let repoName = options.repo;
-    
+
     if (!repoName) {
       const answer = await customPrompt.search();
       if (answer && answer.repoName) {
         repoName = answer.repoName;
       }
     }
-    
-    Action.redirectAction(repoName);
+
+    if (repoName) {
+      Action.redirectAction(repoName);
+    }
   });
 
 program
-  .option("-s, --search", "Search for a repository to get its information by repoName")
+  .command("find")
+  .alias("f")
+  .option("-r, --repo <repoName>", "Existing repository name")
+  .description("Search for a specific repository by its repoName (no arguments).")
   .action(async (options) => {
-    if (!options.search) {
-      program.help();
-      return;
+    let repoName = options.repo;
+
+    if (!repoName) {
+      const answer = await customPrompt.search();
+      if (answer && answer.repoName) {
+        repoName = answer.repoName;
+      }
     }
 
-    const answer = await customPrompt.search();
-    if (answer && answer.repoName) {
-      Action.searchAction(answer.repoName);
+    if (repoName) {
+      Action.searchAction(repoName);
     }
   });
 
 program
   .command("rm")
+  .alias("r")
   .description(
-    "Remove a specific repository by its repoName",
+    "Remove a specific repository by its repoName (no arguments).",
   )
   .action(async () => {
     const answer = await customPrompt.search();
@@ -93,10 +107,11 @@ program
 
 program
   .command("up")
+  .alias("u")
   .option("-r, --repo <repoName>", "Existing repository name")
   .option("-p, --path <path>", "New repository path")
   .description(
-    "Update the path of an existing repository",
+    "Update the path of an existing repository (no arguments).",
   )
   .action(async (options) => {
     let repoName = options.repo, path = options.path;
@@ -119,3 +134,7 @@ program
   });
 
 program.parse(process.argv);
+
+if (!process.argv.slice(2).length) {
+  program.help();
+}

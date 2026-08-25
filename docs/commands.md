@@ -1,144 +1,212 @@
-# **Swichy CLI Commands Reference**:
+# Switchy CLI — Commands Reference
 
-Swichy provides a simple command-line interface for managing repositories. Below is a detailed breakdown of available commands, their syntax, and usage.
+Switchy is a CLI for managing and quickly switching between local repository paths.
 
-## **Options**:
+## Usage
 
-- `-h, --help` → Display help information for the CLI or a specific command.
+```bash
+switchy <command> [options]
+```
 
-## **Commands & Usage**:
+Running `switchy` with no command shows this help output.
 
-### 1. **Initialize Storage**:
+---
+
+## Commands
+
+### `init`
+
+**Alias:** `i`
+
+Initialize the data file where repositories and their metadata are stored.
 
 ```bash
 switchy init
+switchy i
 ```
 
-- Initializes the data file where repository information is stored.
-- **Arguments:** None
+**Arguments:** none
+**Options:** none
 
-### 2. **Add a New Repository**:
+---
+
+### `add <path>`
+
+**Alias:** `a`
+
+Add a new repository to the store.
 
 ```bash
-switchy add <path>
+switchy add ./my-project
+switchy a ~/Desktop/repositories/switchy
 ```
 
-- Adds a new repository to the storage.
-- **Arguments:**
-  - `<path>` → The absolute or relative path of the repository.
+**Arguments:**
 
-**Example:**
+| Argument | Required | Description |
+|---|---|---|
+| `<path>` | Yes | Path to the repository to add |
 
-```bash
-switchy add /home/user/projects/my-repo
-```
+**Options:** none
 
-### 3. **Display Last Opened Repository**:
+**Notes:**
+- Passed directly as a positional shell argument, so `~` is expanded by your shell automatically.
 
-```bash
-switchy last
-```
+---
 
-- Displays the most recently accessed repository.
-- **Arguments:** None
+### `list`
 
-### 4. **Clear All Repositories**:
+**Alias:** `ls`
 
-```bash
-switchy reset
-```
-
-- Removes all stored repositories from the system.
-- **Arguments:** None
-
-### 5. **List All Stored Repositories**:
+List all repositories currently stored.
 
 ```bash
 switchy list
+switchy ls
 ```
 
-- Displays a list of all stored repositories.
-- **Arguments:** None
-
-### 6. **Redirect to a Repository**:
-
-```bash
-switchy redirect <repoName>
-```
-
-- Opens a specific repository by its name.
-- **Arguments:**
-  - `<repoName>` → The name of the repository to open.
-
-**Example:**
-
-```bash
-switchy redirect my-repo
-```
-
-### 7. **Find Repository Information**:
-
-```bash
-switchy find <repoName>
-```
-
-- Searches for a repository by name and retrieves its details.
-- **Arguments:**
-  - `<repoName>` → The name of the repository to find.
-
-**Example:**
-
-```bash
-switchy find my-repo
-```
-
-### 8. **Remove a Specific Repository**:
-
-```bash
-switchy remove <repoName>
-```
-
-- Deletes a repository from the storage.
-- **Arguments:**
-  - `<repoName>` → The name of the repository to remove.
-
-**Example:**
-
-```bash
-switchy remove my-repo
-```
-
-### 9. **Update a Repository Path**:
-
-```bash
-switchy update <repoName> <path>
-```
-
-- Updates the stored path of an existing repository.
-- **Arguments:**
-  - `<repoName>` → The name of the repository.
-  - `<path>` → The new path for the repository.
-
-**Example:**
-
-```bash
-switchy update my-repo /home/user/new-location/my-repo
-```
-
-### 10. **Display Help for a Specific Command**:
-
-```bash
-switchy help [command]
-```
-
-- Shows help information for a specific command.
-- **Arguments (Optional):**
-  - `[command]` → The command you need help with.
-
-**Example:**
-
-```bash
-switchy help add
-```
+**Arguments:** none
+**Options:** none
 
 ---
+
+### `last`
+
+**Alias:** `lts`
+
+Display the most recently opened repository.
+
+```bash
+switchy last
+switchy lts
+```
+
+**Arguments:** none
+**Options:** none
+
+---
+
+### `find`
+
+**Alias:** `f`
+
+Search for a repository and display its information.
+
+```bash
+switchy find
+switchy find -r switchy
+switchy f --repo switchy
+```
+
+**Arguments:** none
+
+**Options:**
+
+| Option | Alias | Description |
+|---|---|---|
+| `--repo <repoName>` | `-r` | Existing repository name |
+
+**Notes:**
+- If `-r`/`--repo` is omitted, an interactive search prompt is shown instead.
+
+---
+
+### `run`
+
+Open a specific repository by name.
+
+```bash
+switchy run
+switchy run -r switchy
+```
+
+**Arguments:** none
+
+**Options:**
+
+| Option | Alias | Description |
+|---|---|---|
+| `--repo <repoName>` | `-r` | Existing repository name |
+
+**Notes:**
+- If `-r`/`--repo` is omitted, an interactive search prompt is shown instead.
+
+---
+
+### `up`
+
+**Alias:** `u`
+
+Update the stored path of an existing repository.
+
+```bash
+switchy up -r switchy -p ~/Desktop/repositories/switchy
+switchy u
+```
+
+**Arguments:** none
+
+**Options:**
+
+| Option | Alias | Description |
+|---|---|---|
+| `--repo <repoName>` | `-r` | Existing repository name |
+| `--path <path>` | `-p` | New repository path |
+
+**Notes:**
+- If `-r`/`--repo` is omitted, an interactive search prompt is shown instead.
+- If `-p`/`--path` is omitted, an interactive text input is shown instead. Paths entered here are expanded for `~` automatically (the shell can't do this since it's typed into a prompt, not passed as a shell argument).
+
+---
+
+### `rm`
+
+**Alias:** `r`
+
+Remove a specific repository from the store.
+
+```bash
+switchy rm
+switchy r
+```
+
+**Arguments:** none
+**Options:** none
+
+**Notes:**
+- Always launches an interactive search prompt to select the repository.
+- Asks for confirmation before deleting.
+
+---
+
+### `clear`
+
+**Alias:** `c`
+
+Clear **all** repositories stored.
+
+```bash
+switchy clear
+switchy c
+```
+
+**Arguments:** none
+**Options:** none
+
+⚠️ **Destructive** — this removes every stored repository, not just one. Use `rm` to remove a single repository instead.
+
+---
+
+## Command Summary
+
+| Command | Alias | Options | Description |
+|---|---|---|---|
+| `init` | `i` | — | Initialize the data store |
+| `add <path>` | `a` | — | Add a new repository |
+| `list` | `ls` | — | List all repositories |
+| `last` | `lts` | — | Show the last opened repository |
+| `find` | `f` | `-r, --repo` | Search for a repository |
+| `run` | — | `-r, --repo` | Open a repository |
+| `up` | `u` | `-r, --repo`, `-p, --path` | Update a repository's path |
+| `rm` | `r` | — | Remove a repository |
+| `clear` | `c` | — | Remove all repositories |
