@@ -23,8 +23,8 @@ program
   });
 
 program
-  .command("last")
-  .description("Display the last opened repository (no arguments)")
+  .command("lts")
+  .description("Display the latest opened repository (no arguments)")
   .action(() => {
     Action.lastAction();
   });
@@ -79,15 +79,6 @@ program
         Action.removeAction(answer.repoName);
       }
     }
-  });
-
-program
-  .command("update <repoName> <path>")
-  .description(
-    "Update the path of an existing repository (arguments: `repoName`, `path`)",
-  )
-  .action((repoName, path) => {
-    Action.updateAction(repoName, path);
   });
 
 program
