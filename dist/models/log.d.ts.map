@@ -1,0 +1,1 @@
+{"version":3,"file":"log.d.ts","sourceRoot":"","sources":["../../models/log.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,iBAAiB,CAAC;AAE7C,qBAAa,GAAG;IACd,MAAM,EAAE,UAAU,CAAC;IACnB,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,EAAE,GAAG,CAAC;gBAEE,MAAM,EAAE,UAAU,EAAE,OAAO,EAAE,MAAM,EAAE,IAAI,GAAE,GAAU;CAKlE"}

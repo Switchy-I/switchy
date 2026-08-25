@@ -2,7 +2,7 @@
 
 import { Command } from "commander";
 import Action from "./action";
-import { customPrompt } from "./utils"
+import { customPrompt, expandTilde } from "./utils"
 
 const program = new Command();
 
@@ -87,6 +87,33 @@ program
     "Update the path of an existing repository (arguments: `repoName`, `path`)",
   )
   .action((repoName, path) => {
+    Action.updateAction(repoName, path);
+  });
+
+program
+  .command("up")
+  .option("-r, --repo <repoName>", "Existing repository name")
+  .option("-p, --path <path>", "New repository path")
+  .description(
+    "Update the path of an existing repository",
+  )
+  .action(async (options) => {
+    let repoName = options.repo, path = options.path;
+
+    if (!repoName) {
+      const answer = await customPrompt.search();
+      if (answer && answer.repoName) {
+        repoName = answer.repoName;
+      }
+    }
+
+    if (!options.path) {
+      const answer = await customPrompt.input("path", "Enter the new path:");
+      if (answer && answer.path) {
+        path = expandTilde(answer.path);
+      }
+    }
+
     Action.updateAction(repoName, path);
   });
 
