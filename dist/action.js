@@ -91,7 +91,6 @@ class Action {
             return utils_1.TAGS.MISSING;
         }
         if (!(0, utils_1.pathIsExist)(path)) {
-            console.log("here");
             (0, utils_1.logger)(new log_1.Log(utils_1.STATUS.FAILED, (0, utils_1.getErrorMessage)(utils_1.TYPES.NOT_FOUND, "Repository path is")));
             return utils_1.TAGS.DOES_NOT_EXIST;
         }
