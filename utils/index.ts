@@ -13,6 +13,8 @@ import { getDataPath, getPath, getName } from "./pathModule";
 
 import { fileIsEmpty, pathIsExist } from "./validator";
 
+import customPrompt from "./customPrompt";
+
 export {
   FileOperator,
   JsonOperator,
@@ -29,4 +31,5 @@ export {
   getName,
   RunScript,
   TAGS,
+  customPrompt
 };

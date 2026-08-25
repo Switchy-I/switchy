@@ -18,6 +18,7 @@ export const TYPES = {
   RESET: "reset",
   REDIRECT: "redirect",
   MATCH: "match",
+  ABORT: "abort",
 } as const;
 
 export type MessageType = (typeof TYPES)[keyof typeof TYPES];
@@ -62,6 +63,9 @@ export const getErrorMessage = (type: MessageType, field?: string): string => {
 
     case TYPES.MATCH:
       return `The repository name doesn't match the old one!`;
+
+    case TYPES.ABORT:
+      return `The prompt session is aborted!`;
 
     default:
       return "Unknown error!";
