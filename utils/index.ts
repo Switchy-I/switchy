@@ -11,7 +11,7 @@ import { TYPES, getErrorMessage, getSuccessMessage } from "./messageHandler";
 
 import { getDataPath, getPath, getName } from "./pathModule";
 
-import { fileIsEmpty, pathIsExist } from "./validator";
+import { fileIsEmpty, pathIsExist, expandTilde } from "./validator";
 
 import customPrompt from "./customPrompt";
 
@@ -31,5 +31,6 @@ export {
   getName,
   RunScript,
   TAGS,
-  customPrompt
+  customPrompt,
+  expandTilde,
 };

@@ -50,6 +50,20 @@ class CustomPrompt {
       this.handlePromptError(error);
     }
   }
+
+  async input(name: string, message: string) {
+    try {
+      const answer = await inquirer.prompt([{
+        type: "input",
+        message,
+        name, 
+      }]);
+
+      return answer;
+    } catch (error: any) {
+      this.handlePromptError(error);
+    }
+  }
 }
 
 export default new CustomPrompt();
