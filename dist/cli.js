@@ -22,13 +22,13 @@ program
 });
 program
     .command("lts")
-    .description("Display the latest opened repository (no arguments)")
+    .description("Display the latest opened repository")
     .action(() => {
     action_1.default.lastAction();
 });
 program
-    .command("reset")
-    .description("Clear all repositories stored (no arguments)")
+    .command("clear")
+    .description("Clear all repositories stored")
     .action(() => {
     action_1.default.resetAction();
 });
@@ -39,9 +39,17 @@ program
     action_1.default.listAction();
 });
 program
-    .command("redirect <repoName>")
-    .description("Open specfic repo with his repoName (arguments: `repoName`)")
-    .action((repoName) => {
+    .command("run")
+    .option("-r, --repo <repoName>", "Existing repository name")
+    .description("Open specfic repo with his repoName")
+    .action(async (options) => {
+    let repoName = options.repo;
+    if (!repoName) {
+        const answer = await utils_1.customPrompt.search();
+        if (answer && answer.repoName) {
+            repoName = answer.repoName;
+        }
+    }
     action_1.default.redirectAction(repoName);
 });
 program

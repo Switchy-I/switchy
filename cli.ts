@@ -24,14 +24,14 @@ program
 
 program
   .command("lts")
-  .description("Display the latest opened repository (no arguments)")
+  .description("Display the latest opened repository")
   .action(() => {
     Action.lastAction();
   });
 
 program
-  .command("reset")
-  .description("Clear all repositories stored (no arguments)")
+  .command("clear")
+  .description("Clear all repositories stored")
   .action(() => {
     Action.resetAction();
   });
@@ -44,9 +44,19 @@ program
   });
 
 program
-  .command("redirect <repoName>")
-  .description("Open specfic repo with his repoName (arguments: `repoName`)")
-  .action((repoName) => {
+  .command("run")
+  .option("-r, --repo <repoName>", "Existing repository name")
+  .description("Open specfic repo with his repoName")
+  .action(async (options) => {
+    let repoName = options.repo;
+    
+    if (!repoName) {
+      const answer = await customPrompt.search();
+      if (answer && answer.repoName) {
+        repoName = answer.repoName;
+      }
+    }
+    
     Action.redirectAction(repoName);
   });
 
