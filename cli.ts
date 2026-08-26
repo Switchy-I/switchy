@@ -37,7 +37,7 @@ program
   });
 
 program
-  .command("list")
+  .command("ls")
   .description("List all repositories (no arguments).")
   .action(() => {
     Action.listAction();
@@ -65,12 +65,20 @@ program
   });
 
 program
-  .command("remove <repoName>")
+  .command("rm")
   .description(
-    "Remove a specific repository by its repoName (arguments: `repoName`)",
+    "Remove a specific repository by its repoName",
   )
-  .action((repoName) => {
-    Action.removeAction(repoName);
+  .action(async () => {
+    const answer = await customPrompt.search();
+    if (answer && answer.repoName) {
+      const deleted = await customPrompt.confirm(
+        `Are you sure you want to remove "${answer.repoName}" repository?`
+      );
+      if (deleted && deleted.confirm) {
+        Action.removeAction(answer.repoName);
+      }
+    }
   });
 
 program
